@@ -1,0 +1,8 @@
+{
+  "appId": "com.aquants.aquamonitor",
+  "appName": "AquaMonitor",
+  "webDir": "dist",
+  "android": {
+    "minWebViewVersion": 55
+  }
+}

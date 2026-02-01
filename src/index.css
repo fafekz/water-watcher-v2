@@ -1,0 +1,236 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Water Monitoring Dashboard - Industrial Modern Design System */
+
+@layer base {
+  /* Light Mode */
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 6%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 6%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 6%;
+
+    /* Teal primary for water theme - darker for better contrast */
+    --primary: 173 85% 28%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 90%;
+    --secondary-foreground: 222 47% 6%;
+
+    --muted: 210 40% 90%;
+    --muted-foreground: 215 25% 35%;
+
+    --accent: 173 85% 28%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 80%;
+    --input: 214 32% 80%;
+    --ring: 199 95% 40%;
+
+    --radius: 0.75rem;
+
+    /* Custom water monitoring colors - higher contrast */
+    --water: 199 95% 32%;
+    --water-glow: 199 100% 40%;
+    --warning: 38 100% 45%;
+    --warning-glow: 38 100% 50%;
+    --critical: 0 65% 55%;
+    --critical-glow: 0 70% 60%;
+    --success: 142 50% 28%;
+    --success-glow: 142 60% 35%;
+    --info: 173 85% 28%;
+    --info-glow: 173 100% 35%;
+
+    /* Gauge specific - more visible track */
+    --gauge-track: 210 30% 82%;
+    --gauge-fill: 199 95% 40%;
+
+    /* Chart colors - bolder */
+    --chart-water: 199 95% 40%;
+    --chart-pressure: 262 90% 50%;
+    --chart-ph: 38 100% 45%;
+    --chart-temp: 0 84% 45%;
+    --chart-flow: 173 85% 28%;
+    --chart-turbidity: 142 80% 32%;
+
+    /* Gradients */
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 30% 95%));
+    --gradient-primary: linear-gradient(135deg, hsl(173 85% 28%), hsl(173 90% 38%));
+
+    /* Sidebar */
+    --sidebar-background: 210 30% 97%;
+    --sidebar-foreground: 222 47% 6%;
+    --sidebar-primary: 173 85% 28%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 40% 93%;
+    --sidebar-accent-foreground: 222 47% 6%;
+    --sidebar-border: 214 32% 85%;
+    --sidebar-ring: 173 85% 28%;
+  }
+
+  /* Dark Mode */
+  .dark {
+    --background: 222 47% 8%;
+    --foreground: 210 40% 96%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 173 80% 40%;
+    --primary-foreground: 222 47% 8%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 173 80% 40%;
+    --accent-foreground: 222 47% 8%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 22%;
+    --input: 217 33% 17%;
+    --ring: 173 80% 40%;
+
+    /* Custom water monitoring colors */
+    --water: 199 89% 48%;
+    --water-glow: 199 100% 55%;
+    --warning: 38 92% 50%;
+    --warning-glow: 38 100% 55%;
+    --critical: 0 72% 51%;
+    --critical-glow: 0 90% 60%;
+    --success: 142 45% 38%;
+    --success-glow: 142 55% 45%;
+    --info: 199 89% 48%;
+    --info-glow: 199 100% 55%;
+
+    /* Gauge specific */
+    --gauge-track: 217 33% 20%;
+    --gauge-fill: 173 80% 40%;
+
+    /* Chart colors */
+    --chart-water: 173 80% 40%;
+    --chart-pressure: 262 83% 58%;
+    --chart-ph: 38 92% 50%;
+    --chart-temp: 0 72% 51%;
+    --chart-flow: 199 89% 48%;
+    --chart-turbidity: 142 71% 45%;
+
+    /* Gradients */
+    --gradient-card: linear-gradient(145deg, hsl(222 47% 12%), hsl(222 47% 9%));
+    --gradient-primary: linear-gradient(135deg, hsl(173 80% 40%), hsl(173 90% 50%));
+
+    /* Sidebar */
+    --sidebar-background: 222 47% 6%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 173 80% 40%;
+    --sidebar-primary-foreground: 222 47% 8%;
+    --sidebar-accent: 217 33% 15%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 217 33% 18%;
+    --sidebar-ring: 173 80% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
+
+@layer components {
+  .gauge-glow {
+    filter: drop-shadow(0 0 15px hsl(var(--water) / 0.5));
+  }
+
+  .status-normal {
+    color: hsl(var(--success));
+    text-shadow: 0 0 10px hsl(var(--success-glow) / 0.5);
+  }
+
+  .status-warning {
+    color: hsl(var(--warning));
+    text-shadow: 0 0 10px hsl(var(--warning-glow) / 0.5);
+  }
+
+  .status-critical {
+    color: hsl(var(--critical));
+    text-shadow: 0 0 10px hsl(var(--critical-glow) / 0.5);
+  }
+
+  .card-gradient {
+    background: var(--gradient-card);
+  }
+
+  .glow-effect {
+    box-shadow: 0 0 40px hsl(var(--water) / 0.15),
+                inset 0 1px 0 hsl(var(--foreground) / 0.05);
+  }
+
+  .metric-value {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+}
+
+@layer utilities {
+  .text-glow-water {
+    text-shadow: 0 0 20px hsl(var(--water-glow) / 0.6);
+  }
+
+  .text-glow-warning {
+    text-shadow: 0 0 20px hsl(var(--warning-glow) / 0.6);
+  }
+
+  .text-glow-critical {
+    text-shadow: 0 0 20px hsl(var(--critical-glow) / 0.6);
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+}
