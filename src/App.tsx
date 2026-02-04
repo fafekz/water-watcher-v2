@@ -12,9 +12,12 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-// Configure status bar for native platforms
-const configureStatusBar = async () => {
+// Configure status bar and body class for native platforms
+const configureNativePlatform = async () => {
   if (Capacitor.isNativePlatform()) {
+    // Add class to body for Capacitor-specific styling
+    document.body.classList.add("capacitor-native");
+
     try {
       // This is the key setting - prevents WebView from drawing under status bar
       await StatusBar.setOverlaysWebView({ overlay: false });
@@ -28,7 +31,7 @@ const configureStatusBar = async () => {
 
 const App = () => {
   useEffect(() => {
-    configureStatusBar();
+    configureNativePlatform();
   }, []);
 
   return (

@@ -40,7 +40,8 @@ export const Navigation = ({
         {/* Backdrop */}
         {isOpen && (
           <div
-            className="fixed inset-0 top-[85px] md:top-[73px] bg-white/50 dark:bg-black/50 z-40 lg:hidden"
+            className="fixed inset-0 bg-white/50 dark:bg-black/50 z-40 lg:hidden"
+            style={{ top: 'var(--header-top)' }}
             onClick={onClose}
           />
         )}
@@ -50,7 +51,8 @@ export const Navigation = ({
           initial={{ x: "-100%" }}
           animate={{ x: isOpen ? 0 : "-100%" }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="fixed top-[85px] md:top-[73px] left-0 bottom-0 w-64 z-50 border-r border-border bg-card/95 backdrop-blur-lg lg:hidden flex flex-col p-4 pb-28 gap-2 overflow-y-auto"
+          className="fixed left-0 bottom-0 w-64 z-50 border-r border-border bg-card/95 backdrop-blur-lg lg:hidden flex flex-col p-4 pb-28 gap-2 overflow-y-auto"
+          style={{ top: 'var(--header-top)' }}
         >
           <div className="space-y-1 flex-shrink-0">
             {tabs.map(tab => {

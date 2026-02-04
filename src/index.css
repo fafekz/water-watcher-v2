@@ -213,6 +213,29 @@
 }
 
 @layer utilities {
+  /* Capacitor Native App - Status bar offset */
+  /* These values control spacing for the native app status bar area */
+  :root {
+    --status-bar-height: 0px;
+    --header-top: 57px; /* header height - used for positioning elements below header */
+  }
+
+  /* When running as Capacitor native app on mobile (< 768px) */
+  @media (max-width: 767px) {
+    body.capacitor-native {
+      --status-bar-height: 28px;
+      --header-top: 85px; /* 57px header + 28px status bar */
+    }
+  }
+
+  /* On tablet and larger, always use standard header height (no status bar offset) */
+  @media (min-width: 768px) {
+    :root {
+      --status-bar-height: 0px;
+      --header-top: 57px;
+    }
+  }
+
   /* Recharts Brush - styled to match Refresh Rate slider */
 
 

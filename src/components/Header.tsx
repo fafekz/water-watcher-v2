@@ -49,7 +49,7 @@ export const Header = ({
       }} animate={{
         opacity: 1,
         y: 0
-      }} className="sticky top-7 md:top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg">
+      }} className="sticky z-50 border-b border-border bg-background/80 backdrop-blur-lg md:top-0" style={{ top: 'var(--status-bar-height)' }}>
         <div className="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto">
           <div className="flex items-center gap-4">
             <button onClick={onMenuClick} className="p-2 rounded-lg hover:bg-secondary transition-colors lg:hidden">
@@ -85,13 +85,14 @@ export const Header = ({
       {/* Pond Menu Backdrop */}
       {pondMenuOpen && (
         <div
-          className="fixed inset-0 top-[85px] md:top-[73px] lg:left-64 bg-white/50 dark:bg-black/50 z-40"
+          className="fixed inset-0 lg:left-64 bg-white/50 dark:bg-black/50 z-40"
+          style={{ top: 'var(--header-top)' }}
           onClick={onPondClick}
         />
       )}
 
       {/* Pond Menu - slides down from header */}
-      <div className="fixed top-[85px] md:top-[73px] left-0 right-0 lg:left-64 z-40 overflow-hidden pointer-events-none">
+      <div className="fixed left-0 right-0 lg:left-64 z-40 overflow-hidden pointer-events-none" style={{ top: 'var(--header-top)' }}>
         <motion.div
           initial={{ y: "-100%" }}
           animate={{ y: pondMenuOpen ? 0 : "-100%" }}

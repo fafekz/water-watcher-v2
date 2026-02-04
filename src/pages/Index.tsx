@@ -50,9 +50,9 @@ const Index = () => {
   };
 
   return (
-    <div className="h-screen bg-background flex pt-7 md:pt-0 relative overflow-hidden">
-      {/* Status bar background cover - only on mobile */}
-      <div className="fixed top-0 left-0 right-0 h-7 bg-background z-[60] md:hidden" />
+    <div className="h-screen bg-background flex relative overflow-hidden" style={{ paddingTop: 'var(--status-bar-height)' }}>
+      {/* Status bar background cover - only in Capacitor native app on mobile */}
+      <div className="fixed top-0 left-0 right-0 bg-background z-[60] md:hidden" style={{ height: 'var(--status-bar-height)' }} />
       <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
 
       <div className="flex-1 flex flex-col">
