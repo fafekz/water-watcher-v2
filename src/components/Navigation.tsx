@@ -143,7 +143,7 @@ export const Navigation = ({
             <Activity className="w-4 h-4 text-water" />
             <span className="text-sm font-medium text-foreground">System Health</span>
           </div>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             All sensors operational.<br />Last sync 2s ago.
           </p>
         </div>

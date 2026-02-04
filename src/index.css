@@ -214,21 +214,71 @@
 
 @layer utilities {
   /* Recharts Brush - styled to match Refresh Rate slider */
-  .brush-styled .recharts-brush-slide {
-    fill: hsl(var(--water));
-    fill-opacity: 1;
-    rx: 4;
-    ry: 4;
+
+
+  /* Push brush down from X axis labels - centered between axis and divider */
+  .historical-brush {
+    transform: translateY(28px);
   }
 
-  .brush-styled .recharts-brush-background rect,
-  .brush-styled > rect {
-    rx: 4;
-    ry: 4;
+  /* Selected range - no rounding (square ends) */
+  .historical-brush .recharts-brush-slide {
+    fill: hsl(var(--water)) !important;
+    fill-opacity: 1 !important;
+    rx: 0 !important;
+    ry: 0 !important;
   }
 
-  .brush-styled .recharts-brush-texts {
-    display: none;
+  /* The main track background - rounded ends */
+  .historical-brush > rect {
+    rx: 4;
+    ry: 4;
+    fill: hsl(var(--secondary)) !important;
+    stroke: none !important;
+  }
+
+  /* Hide ALL default traveller rectangles globally */
+  .recharts-brush-traveller rect {
+    fill: none !important;
+    stroke: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  /* Remove focus outline/ring from brush traveller */
+  .recharts-brush-traveller:focus,
+  .recharts-brush-traveller:focus-visible,
+  .recharts-brush-traveller:focus-within,
+  .recharts-brush-traveller *:focus,
+  .recharts-brush-traveller *:focus-visible,
+  .historical-brush *:focus,
+  .historical-brush *:focus-visible,
+  .recharts-brush *:focus,
+  .recharts-brush *:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Hide any focus rectangle overlay */
+  .recharts-brush-traveller rect[fill="#fff"],
+  .recharts-brush-traveller rect[fill="white"],
+  .recharts-brush-traveller rect[fill="#ffffff"],
+  .recharts-brush rect[stroke="#fff"],
+  .recharts-brush rect[stroke="white"],
+  .recharts-brush rect[stroke="#ffffff"] {
+    display: none !important;
+  }
+
+  /* Time labels - hidden by default, shown when dragging */
+  .historical-brush .recharts-brush-texts text {
+    fill: hsl(var(--foreground));
+    font-size: 11px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .historical-brush.brush-dragging .recharts-brush-texts text {
+    opacity: 1;
   }
 
   .text-glow-water {

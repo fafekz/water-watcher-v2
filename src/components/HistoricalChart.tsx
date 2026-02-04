@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   LineChart,
@@ -79,6 +79,20 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
   const [refAreaRight, setRefAreaRight] = useState<string | null>(null);
   const [isSelecting, setIsSelecting] = useState(false);
   const [zoomDomain, setZoomDomain] = useState<{ left: number; right: number } | null>(null);
+
+  // Brush dragging state for showing/hiding time labels
+  const [isBrushDragging, setIsBrushDragging] = useState(false);
+
+  // Global mouseup listener to catch release outside brush
+  useEffect(() => {
+    const handleGlobalMouseUp = () => setIsBrushDragging(false);
+    window.addEventListener('mouseup', handleGlobalMouseUp);
+    window.addEventListener('touchend', handleGlobalMouseUp);
+    return () => {
+      window.removeEventListener('mouseup', handleGlobalMouseUp);
+      window.removeEventListener('touchend', handleGlobalMouseUp);
+    };
+  }, []);
 
   const filteredData = useMemo(() => {
     const now = new Date();
@@ -421,6 +435,7 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={zoomedData}
+            margin={{ top: 5, right: 5, left: 0, bottom: 40 }}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
@@ -443,6 +458,8 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
               fontSize={12}
               tickLine={false}
               axisLine={false}
+              width={35}
+              tickMargin={0}
             />
             <Tooltip content={<CustomTooltip />} />
 
@@ -477,10 +494,38 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
             {!isZoomed && (
               <Brush
                 dataKey="time"
-                height={40}
-                stroke={chartColors.primary}
+                height={8}
+                stroke="none"
                 fill={chartColors.brushFill}
-                travellerWidth={10}
+                travellerWidth={20}
+                className={`historical-brush ${isBrushDragging ? 'brush-dragging' : ''}`}
+                onChange={() => setIsBrushDragging(true)}
+                onMouseUp={() => setIsBrushDragging(false)}
+                traveller={(props: any) => {
+                  const { x, y, height, width } = props;
+                  const knobSize = 20;
+                  const cx = x + (width || knobSize) / 2;
+                  const cy = y + height / 2;
+                  return (
+                    <g
+                      onMouseDown={() => setIsBrushDragging(true)}
+                      onMouseUp={() => setIsBrushDragging(false)}
+                      onTouchStart={() => setIsBrushDragging(true)}
+                      onTouchEnd={() => setIsBrushDragging(false)}
+                    >
+                      {/* Only render our custom circle knob */}
+                      <circle
+                        cx={cx}
+                        cy={cy}
+                        r={knobSize / 2}
+                        fill={chartColors.cardBg}
+                        stroke={chartColors.primary}
+                        strokeWidth={2}
+                        style={{ cursor: 'ew-resize' }}
+                      />
+                    </g>
+                  );
+                }}
               />
             )}
           </LineChart>
