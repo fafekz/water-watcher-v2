@@ -23,6 +23,7 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState<TabType>("dashboard");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [alertsPanelOpen, setAlertsPanelOpen] = useState(false);
+  const [pondMenuOpen, setPondMenuOpen] = useState(false);
   const [metrics, setMetrics] = useState<WaterMetrics>(generateCurrentMetrics());
   const [historicalData] = useState<HistoricalDataPoint[]>(() => generateHistoricalData(168));
 
@@ -49,15 +50,29 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex pt-7 relative">
-      {/* Status bar background cover */}
-      <div className="fixed top-0 left-0 right-0 h-7 bg-background z-[60]" />
+    <div className="h-screen bg-background flex pt-7 md:pt-0 relative overflow-hidden">
+      {/* Status bar background cover - only on mobile */}
+      <div className="fixed top-0 left-0 right-0 h-7 bg-background z-[60] md:hidden" />
       <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
 
       <div className="flex-1 flex flex-col">
         <Header
-          onMenuClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          onBellClick={() => setAlertsPanelOpen(!alertsPanelOpen)}
+          onMenuClick={() => {
+            setMobileMenuOpen(!mobileMenuOpen);
+            setAlertsPanelOpen(false);
+            setPondMenuOpen(false);
+          }}
+          onBellClick={() => {
+            setAlertsPanelOpen(!alertsPanelOpen);
+            setMobileMenuOpen(false);
+            setPondMenuOpen(false);
+          }}
+          onPondClick={() => {
+            setPondMenuOpen(!pondMenuOpen);
+            setMobileMenuOpen(false);
+            setAlertsPanelOpen(false);
+          }}
+          pondMenuOpen={pondMenuOpen}
         />
 
         <main className="flex-1 p-4 md:p-6 pb-32 md:pb-28 lg:pb-6 overflow-auto">

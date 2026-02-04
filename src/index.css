@@ -213,6 +213,24 @@
 }
 
 @layer utilities {
+  /* Recharts Brush - styled to match Refresh Rate slider */
+  .brush-styled .recharts-brush-slide {
+    fill: hsl(var(--water));
+    fill-opacity: 1;
+    rx: 4;
+    ry: 4;
+  }
+
+  .brush-styled .recharts-brush-background rect,
+  .brush-styled > rect {
+    rx: 4;
+    ry: 4;
+  }
+
+  .brush-styled .recharts-brush-texts {
+    display: none;
+  }
+
   .text-glow-water {
     text-shadow: 0 0 20px hsl(var(--water-glow) / 0.6);
   }

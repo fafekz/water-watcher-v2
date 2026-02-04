@@ -40,7 +40,7 @@ export const Navigation = ({
         {/* Backdrop */}
         {isOpen && (
           <div
-            className="fixed inset-0 top-[85px] bg-black/50 z-40 lg:hidden"
+            className="fixed inset-0 top-[85px] md:top-[73px] bg-white/50 dark:bg-black/50 z-40 lg:hidden"
             onClick={onClose}
           />
         )}
@@ -50,33 +50,36 @@ export const Navigation = ({
           initial={{ x: "-100%" }}
           animate={{ x: isOpen ? 0 : "-100%" }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="fixed top-[85px] left-0 bottom-0 w-64 z-50 border-r border-border bg-card/95 backdrop-blur-lg lg:hidden"
+          className="fixed top-[85px] md:top-[73px] left-0 bottom-0 w-64 z-50 border-r border-border bg-card/95 backdrop-blur-lg lg:hidden flex flex-col p-4 pb-28 gap-2 overflow-y-auto"
         >
-          <div className="p-4">
-            <div className="space-y-1">
-              {tabs.map(tab => {
-                const Icon = tab.icon;
-                const isActive = activeTab === tab.id;
-                return (
-                  <button 
-                    key={tab.id} 
-                    onClick={() => {
-                      onTabChange(tab.id);
-                      onClose?.();
-                    }} 
-                    className={cn(
-                      "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-left",
-                      isActive 
-                        ? "bg-water/10 text-water" 
-                        : "text-muted-foreground hover:bg-secondary hover:text-foreground"
-                    )}
-                  >
-                    <Icon className="w-5 h-5" />
-                    <span className="font-medium">{tab.label}</span>
-                  </button>
-                );
-              })}
-            </div>
+          <div className="space-y-1 flex-shrink-0">
+            {tabs.map(tab => {
+              const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    onTabChange(tab.id);
+                    onClose?.();
+                  }}
+                  className={cn(
+                    "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-left",
+                    isActive
+                      ? "bg-water/10 text-water"
+                      : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  )}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span className="font-medium">{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="flex-shrink-0 pt-2 mt-auto">
+            <p className="text-sm text-muted-foreground">Powered by</p>
+            <img src={aquantsLogo} alt="Aquants Logo" className="w-full max-w-full" />
           </div>
         </motion.nav>
         
@@ -117,12 +120,13 @@ export const Navigation = ({
   }} animate={{
     opacity: 1,
     x: 0
-  }} className="hidden lg:flex flex-col w-64 border-r border-border bg-sidebar p-4 gap-2">
-      <div className="px-4 py-4 mb-4 flex justify-center">
+  }} className="hidden lg:flex flex-col w-64 border-r border-border bg-sidebar p-4 gap-2 h-full overflow-y-auto">
+      <div className="px-4 py-4 mb-4 flex-shrink-0">
+        <p className="text-sm text-muted-foreground">Powered by</p>
         <img src={aquantsLogo} alt="Aquants Logo" className="w-full max-w-full" />
       </div>
 
-      <div className="space-y-1">
+      <div className="space-y-1 flex-shrink-0">
         {tabs.map(tab => {
         const Icon = tab.icon;
         const isActive = activeTab === tab.id;
@@ -133,14 +137,14 @@ export const Navigation = ({
       })}
       </div>
 
-      <div className="mt-auto pb-6 pt-[20px]">
+      <div className="flex-shrink-0 pt-2 mt-auto">
         <div className="card-gradient rounded-xl p-4 border border-border">
           <div className="flex items-center gap-2 mb-2">
             <Activity className="w-4 h-4 text-water" />
             <span className="text-sm font-medium text-foreground">System Health</span>
           </div>
           <p className="text-xs text-muted-foreground">
-            All sensors operational. Last sync 2s ago.
+            All sensors operational.<br />Last sync 2s ago.
           </p>
         </div>
       </div>

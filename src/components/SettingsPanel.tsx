@@ -27,8 +27,8 @@ export const SettingsPanel = () => {
       {/* Notifications Section */}
       <div className="card-gradient rounded-xl border border-border p-6">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 rounded-lg bg-primary/10">
-            <Bell className="w-5 h-5 text-primary" />
+          <div className="p-2 rounded-lg bg-water/10">
+            <Bell className="w-5 h-5 text-water" />
           </div>
           <div>
             <h3 className="text-lg font-semibold text-foreground">Notifications</h3>
@@ -82,11 +82,11 @@ export const SettingsPanel = () => {
       {/* Display & Appearance */}
       <div className="card-gradient rounded-xl border border-border p-6">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 rounded-lg bg-primary/10">
+          <div className="p-2 rounded-lg bg-water/10">
             {theme === "dark" ? (
-              <Moon className="w-5 h-5 text-primary" />
+              <Moon className="w-5 h-5 text-water" />
             ) : (
-              <Sun className="w-5 h-5 text-primary" />
+              <Sun className="w-5 h-5 text-water" />
             )}
           </div>
           <div>
@@ -118,8 +118,8 @@ export const SettingsPanel = () => {
       {/* Monitoring Settings */}
       <div className="card-gradient rounded-xl border border-border p-6">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 rounded-lg bg-primary/10">
-            <Gauge className="w-5 h-5 text-primary" />
+          <div className="p-2 rounded-lg bg-water/10">
+            <Gauge className="w-5 h-5 text-water" />
           </div>
           <div>
             <h3 className="text-lg font-semibold text-foreground">Monitoring</h3>
@@ -139,7 +139,7 @@ export const SettingsPanel = () => {
               min={1}
               max={10}
               step={1}
-              className="w-full"
+              className="w-full [&>span:first-child>span]:bg-water [&_[role=slider]]:!border-water [&_[role=slider]]:ring-water/50"
             />
             <p className="text-sm text-muted-foreground mt-1">How often sensor data updates</p>
           </div>
@@ -169,8 +169,8 @@ export const SettingsPanel = () => {
       {/* System Status */}
       <div className="card-gradient rounded-xl border border-border p-6">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 rounded-lg bg-primary/10">
-            <Shield className="w-5 h-5 text-primary" />
+          <div className="p-2 rounded-lg bg-water/10">
+            <Shield className="w-5 h-5 text-water" />
           </div>
           <div>
             <h3 className="text-lg font-semibold text-foreground">System</h3>

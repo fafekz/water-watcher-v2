@@ -61,7 +61,7 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
     to: undefined,
   });
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  
+
   // Theme-aware colors
   const chartColors = useMemo(() => {
     const isDark = theme === "dark";
@@ -82,10 +82,10 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
 
   const filteredData = useMemo(() => {
     const now = new Date();
-    
+
     let cutoff: Date;
     let endDate: Date = now;
-    
+
     if (timeRange === "custom" && customDateRange.from) {
       cutoff = customDateRange.from;
       endDate = customDateRange.to || now;
@@ -101,19 +101,28 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
       cutoff = new Date(now.getTime() - hoursBack * 60 * 60 * 1000);
     }
 
+    // For 7d view or custom ranges spanning multiple days, include the date to make labels unique
+    const hoursSpan = (endDate.getTime() - cutoff.getTime()) / (1000 * 60 * 60);
+    const includeDate = hoursSpan > 24;
+
     return data
       .filter((d) => {
         const date = new Date(d.timestamp);
         return date >= cutoff && date <= endDate;
       })
-      .map((d, index) => ({
-        ...d,
-        index,
-        time: new Date(d.timestamp).toLocaleTimeString("en-US", {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-      }));
+      .map((d, index) => {
+        const date = new Date(d.timestamp);
+        const time = includeDate
+          ? date.toLocaleDateString("en-GB", { month: "short", day: "numeric" }) +
+            " " +
+            date.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", hour12: false })
+          : date.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", hour12: false });
+        return {
+          ...d,
+          index,
+          time,
+        };
+      });
   }, [data, timeRange, customDateRange]);
 
   const zoomedData = useMemo(() => {
@@ -127,11 +136,11 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
     return activeMetrics.map((metric) => {
       const values = dataToAnalyze.map((d) => d[metric] as number).filter((v) => typeof v === "number");
       if (values.length === 0) return { metric, min: 0, max: 0, avg: 0 };
-      
+
       const min = Math.min(...values);
       const max = Math.max(...values);
       const avg = values.reduce((sum, v) => sum + v, 0) / values.length;
-      
+
       return { metric, min, max, avg };
     });
   }, [zoomedData, activeMetrics]);
@@ -161,12 +170,12 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
     if (refAreaLeft && refAreaRight) {
       const leftIndex = zoomedData.findIndex((d) => d.time === refAreaLeft);
       const rightIndex = zoomedData.findIndex((d) => d.time === refAreaRight);
-      
+
       if (leftIndex !== -1 && rightIndex !== -1) {
-        const [left, right] = leftIndex < rightIndex 
-          ? [leftIndex, rightIndex] 
+        const [left, right] = leftIndex < rightIndex
+          ? [leftIndex, rightIndex]
           : [rightIndex, leftIndex];
-        
+
         if (right - left > 1) {
           const baseLeft = zoomDomain ? zoomDomain.left : 0;
           setZoomDomain({
@@ -176,7 +185,7 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
         }
       }
     }
-    
+
     setRefAreaLeft(null);
     setRefAreaRight(null);
     setIsSelecting(false);
@@ -185,11 +194,11 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
   const handleZoomIn = useCallback(() => {
     const currentLength = zoomedData.length;
     if (currentLength <= 4) return;
-    
+
     const zoomAmount = Math.floor(currentLength * 0.25);
     const baseLeft = zoomDomain ? zoomDomain.left : 0;
     const baseRight = zoomDomain ? zoomDomain.right : filteredData.length - 1;
-    
+
     setZoomDomain({
       left: baseLeft + zoomAmount,
       right: baseRight - zoomAmount,
@@ -198,11 +207,11 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
 
   const handleZoomOut = useCallback(() => {
     if (!zoomDomain) return;
-    
+
     const expandAmount = Math.floor((zoomDomain.right - zoomDomain.left) * 0.5);
     const newLeft = Math.max(0, zoomDomain.left - expandAmount);
     const newRight = Math.min(filteredData.length - 1, zoomDomain.right + expandAmount);
-    
+
     if (newLeft === 0 && newRight === filteredData.length - 1) {
       setZoomDomain(null);
     } else {
@@ -307,7 +316,7 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
                 {range}
               </button>
             ))}
-            
+
             {/* Custom Date Range Picker */}
             <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
               <PopoverTrigger asChild>
@@ -398,8 +407,8 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
               backgroundColor: activeMetrics.includes(metric)
                 ? metricColors[metric].bg
                 : undefined,
-              color: activeMetrics.includes(metric) 
-                ? getContrastText(metricColors[metric].lightness) 
+              color: activeMetrics.includes(metric)
+                ? getContrastText(metricColors[metric].lightness)
                 : undefined,
             }}
           >
