@@ -85,14 +85,13 @@ export const Header = ({
       {/* Pond Menu Backdrop */}
       {pondMenuOpen && (
         <div
-          className="fixed inset-0 lg:left-64 bg-white/50 dark:bg-black/50 z-40"
-          style={{ top: 'var(--header-top)' }}
+          className="fixed top-header left-0 right-0 bottom-0 lg:left-64 bg-white/50 dark:bg-black/50 z-40"
           onClick={onPondClick}
         />
       )}
 
       {/* Pond Menu - slides down from header */}
-      <div className="fixed left-0 right-0 lg:left-64 z-40 overflow-hidden pointer-events-none" style={{ top: 'var(--header-top)' }}>
+      <div className="fixed top-header left-0 right-0 lg:left-64 z-40 overflow-hidden pointer-events-none">
         <motion.div
           initial={{ y: "-100%" }}
           animate={{ y: pondMenuOpen ? 0 : "-100%" }}

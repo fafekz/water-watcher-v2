@@ -95,6 +95,9 @@ export default {
       fontFamily: {
         mono: ["JetBrains Mono", "Fira Code", "monospace"],
       },
+      spacing: {
+        'header': 'var(--header-top)',
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

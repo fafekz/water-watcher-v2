@@ -12,8 +12,7 @@ export const AlertsPanel = ({ isOpen, onClose }: AlertsPanelProps) => {
       {/* Backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 lg:left-64 bg-white/50 dark:bg-black/50 z-40"
-          style={{ top: 'var(--header-top)' }}
+          className="fixed top-header left-0 right-0 bottom-0 lg:left-64 bg-white/50 dark:bg-black/50 z-40"
           onClick={onClose}
         />
       )}
@@ -23,8 +22,7 @@ export const AlertsPanel = ({ isOpen, onClose }: AlertsPanelProps) => {
         initial={{ x: "100%" }}
         animate={{ x: isOpen ? 0 : "100%" }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
-        className="fixed right-0 bottom-0 w-80 max-w-[85vw] z-40 lg:z-50 border-l border-border bg-card/95 backdrop-blur-lg overflow-y-auto"
-        style={{ top: 'var(--header-top)' }}
+        className="fixed top-header right-0 bottom-0 w-80 max-w-[85vw] z-40 lg:z-50 border-l border-border bg-card/95 backdrop-blur-lg overflow-y-auto"
       >
         <div className="p-4">
           {/* Header */}

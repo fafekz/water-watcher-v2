@@ -217,14 +217,14 @@
   /* These values control spacing for the native app status bar area */
   :root {
     --status-bar-height: 0px;
-    --header-top: 57px; /* header height - used for positioning elements below header */
+    --header-top: 73px; /* header height - used for positioning elements below header */
   }
 
   /* When running as Capacitor native app on mobile (< 768px) */
   @media (max-width: 767px) {
     body.capacitor-native {
       --status-bar-height: 28px;
-      --header-top: 85px; /* 57px header + 28px status bar */
+      --header-top: 101px; /* 73px header + 28px status bar */
     }
   }
 
@@ -232,7 +232,7 @@
   @media (min-width: 768px) {
     :root {
       --status-bar-height: 0px;
-      --header-top: 57px;
+      --header-top: 73px;
     }
   }
 

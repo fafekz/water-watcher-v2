@@ -25,7 +25,7 @@ export const SettingsPanel = () => {
   return (
     <div className="space-y-6">
       {/* Notifications Section */}
-      <div className="card-gradient rounded-xl border border-border p-6">
+      <div className="card-gradient rounded-xl border border-border p-6 glow-effect">
         <div className="flex items-center gap-3 mb-6">
           <div className="p-2 rounded-lg bg-water/10">
             <Bell className="w-5 h-5 text-water" />
@@ -80,7 +80,7 @@ export const SettingsPanel = () => {
       </div>
 
       {/* Display & Appearance */}
-      <div className="card-gradient rounded-xl border border-border p-6">
+      <div className="card-gradient rounded-xl border border-border p-6 glow-effect">
         <div className="flex items-center gap-3 mb-6">
           <div className="p-2 rounded-lg bg-water/10">
             {theme === "dark" ? (
@@ -116,7 +116,7 @@ export const SettingsPanel = () => {
       </div>
 
       {/* Monitoring Settings */}
-      <div className="card-gradient rounded-xl border border-border p-6">
+      <div className="card-gradient rounded-xl border border-border p-6 glow-effect">
         <div className="flex items-center gap-3 mb-6">
           <div className="p-2 rounded-lg bg-water/10">
             <Gauge className="w-5 h-5 text-water" />
@@ -167,7 +167,7 @@ export const SettingsPanel = () => {
       </div>
 
       {/* System Status */}
-      <div className="card-gradient rounded-xl border border-border p-6">
+      <div className="card-gradient rounded-xl border border-border p-6 glow-effect">
         <div className="flex items-center gap-3 mb-6">
           <div className="p-2 rounded-lg bg-water/10">
             <Shield className="w-5 h-5 text-water" />

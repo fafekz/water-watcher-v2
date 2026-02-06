@@ -40,8 +40,7 @@ export const Navigation = ({
         {/* Backdrop */}
         {isOpen && (
           <div
-            className="fixed inset-0 bg-white/50 dark:bg-black/50 z-40 lg:hidden"
-            style={{ top: 'var(--header-top)' }}
+            className="fixed top-header left-0 right-0 bottom-0 bg-white/50 dark:bg-black/50 z-40 lg:hidden"
             onClick={onClose}
           />
         )}
@@ -51,37 +50,38 @@ export const Navigation = ({
           initial={{ x: "-100%" }}
           animate={{ x: isOpen ? 0 : "-100%" }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="fixed left-0 bottom-0 w-64 z-50 border-r border-border bg-card/95 backdrop-blur-lg lg:hidden flex flex-col p-4 pb-28 gap-2 overflow-y-auto"
-          style={{ top: 'var(--header-top)' }}
+          className="fixed top-header left-0 bottom-0 w-64 z-50 border-r border-border bg-card/95 backdrop-blur-lg lg:hidden flex flex-col overflow-y-auto"
         >
-          <div className="space-y-1 flex-shrink-0">
-            {tabs.map(tab => {
-              const Icon = tab.icon;
-              const isActive = activeTab === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => {
-                    onTabChange(tab.id);
-                    onClose?.();
-                  }}
-                  className={cn(
-                    "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-left",
-                    isActive
-                      ? "bg-water/10 text-water"
-                      : "text-muted-foreground hover:bg-secondary hover:text-foreground"
-                  )}
-                >
-                  <Icon className="w-5 h-5" />
-                  <span className="font-medium">{tab.label}</span>
-                </button>
-              );
-            })}
-          </div>
+          <div className="p-4 pb-28 flex flex-col gap-2 flex-1">
+            <div className="space-y-1 flex-shrink-0">
+              {tabs.map(tab => {
+                const Icon = tab.icon;
+                const isActive = activeTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => {
+                      onTabChange(tab.id);
+                      onClose?.();
+                    }}
+                    className={cn(
+                      "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-left",
+                      isActive
+                        ? "bg-water/10 text-water"
+                        : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                    )}
+                  >
+                    <Icon className="w-5 h-5" />
+                    <span className="font-medium">{tab.label}</span>
+                  </button>
+                );
+              })}
+            </div>
 
-          <div className="flex-shrink-0 pt-2 mt-auto">
-            <p className="text-sm text-muted-foreground">Powered by</p>
-            <img src={aquantsLogo} alt="Aquants Logo" className="w-full max-w-full" />
+            <div className="flex-shrink-0 pt-2 mt-auto">
+              <p className="text-sm text-muted-foreground">Powered by</p>
+              <img src={aquantsLogo} alt="Aquants Logo" className="w-full max-w-full" />
+            </div>
           </div>
         </motion.nav>
         
@@ -140,7 +140,7 @@ export const Navigation = ({
       </div>
 
       <div className="flex-shrink-0 pt-2 mt-auto">
-        <div className="card-gradient rounded-xl p-4 border border-border">
+        <div className="card-gradient rounded-xl p-4 border border-border glow-effect">
           <div className="flex items-center gap-2 mb-2">
             <Activity className="w-4 h-4 text-water" />
             <span className="text-sm font-medium text-foreground">System Health</span>

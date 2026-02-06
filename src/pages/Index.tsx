@@ -208,7 +208,7 @@ const Index = () => {
               {/* System Performance */}
               <motion.div
                 variants={itemVariants}
-                className="card-gradient rounded-2xl border border-border p-6"
+                className="card-gradient rounded-2xl border border-border p-6 glow-effect"
               >
                 <h3 className="text-lg font-semibold text-foreground mb-1">System Performance</h3>
                 <p className="text-sm text-muted-foreground mb-6">Overview of system health and efficiency</p>
@@ -250,7 +250,7 @@ const Index = () => {
                 <h2 className="text-2xl font-bold text-foreground mb-1">Alerts & Notifications</h2>
                 <p className="text-muted-foreground">Actively ongoing alerts</p>
               </div>
-              <div className="card-gradient rounded-xl border border-border p-6 space-y-4">
+              <div className="card-gradient rounded-xl border border-border p-6 space-y-4 glow-effect">
                 <div className="flex items-start gap-4 p-4 rounded-lg bg-warning/10 border border-warning/20">
                   <div className="p-2 rounded-full bg-warning/20">
                     <Activity className="w-5 h-5 text-warning" />
@@ -295,7 +295,7 @@ const Index = () => {
                 <h2 className="text-2xl font-bold text-foreground mb-1">Historical Alerts</h2>
                 <p className="text-muted-foreground">List of past alerts and notifications</p>
               </div>
-              <div className="card-gradient rounded-xl border border-border p-8 text-center">
+              <div className="card-gradient rounded-xl border border-border p-8 text-center glow-effect">
                 <Activity className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-foreground mb-2">No Historical Alerts</h3>
                 <p className="text-muted-foreground">Check this section again in some time</p>
