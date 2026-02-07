@@ -323,8 +323,8 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
                 className={cn(
                   "px-3 py-1.5 rounded-lg text-sm font-medium transition-all",
                   timeRange === range
-                    ? "bg-water text-white"
-                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                    ? "bg-[hsl(210,80%,45%)] text-white"
+                    : "bg-secondary text-muted-foreground hover:text-black dark:hover:text-white"
                 )}
               >
                 {range}
@@ -332,15 +332,14 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
             ))}
 
             {/* Custom Date Range Picker */}
-            <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+            <Popover open={isCalendarOpen} onOpenChange={(open) => { setIsCalendarOpen(open); if (open) setTimeRange("custom"); }}>
               <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
+                <button
                   className={cn(
-                    "px-3 py-1.5 h-auto rounded-lg text-sm font-medium transition-all gap-2",
+                    "inline-flex items-center h-[32px] px-3 py-1.5 rounded-lg text-sm font-medium transition-all gap-2",
                     timeRange === "custom"
-                      ? "bg-water text-white border-water hover:bg-water/90"
-                      : "bg-secondary text-secondary-foreground hover:bg-secondary/80 border-transparent"
+                      ? "bg-[hsl(210,80%,45%)] text-white"
+                      : "bg-secondary text-muted-foreground hover:text-black dark:hover:text-white"
                   )}
                 >
                   <CalendarIcon className="w-4 h-4" />
@@ -353,7 +352,7 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
                       format(customDateRange.from, "MMM d, yyyy")
                     )
                   )}
-                </Button>
+                </button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-4" align="end">
                 <div className="space-y-4">
@@ -370,7 +369,7 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
                       setCustomDateRange({ from: range?.from, to: range?.to });
                     }}
                     numberOfMonths={1}
-                    className="pointer-events-auto"
+                    className={cn("pointer-events-auto", customDateRange.from && "range-active")}
                   />
                   <div className="flex gap-2">
                     <Button
@@ -386,7 +385,7 @@ export const HistoricalChart = ({ data, className }: HistoricalChartProps) => {
                     </Button>
                     <Button
                       size="sm"
-                      className="flex-1 bg-water hover:bg-water/90"
+                      className="flex-1 bg-[hsl(210,80%,45%)] hover:bg-[hsl(210,80%,40%)]"
                       onClick={() => {
                         if (customDateRange.from) {
                           setTimeRange("custom");

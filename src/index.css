@@ -210,6 +210,13 @@
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum";
   }
+
+  /* Calendar: when range is active, today switches to outline-only */
+  .range-active .day-today:not([aria-selected]) {
+    background: transparent !important;
+    color: hsl(var(--foreground)) !important;
+    box-shadow: inset 0 0 0 2px hsl(var(--accent));
+  }
 }
 
 @layer utilities {
